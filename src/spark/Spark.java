@@ -32,7 +32,9 @@ public class Spark {
 		try {
 			sendData.command("scp -r spark.tar.gz "+machine+":~/").consumeAsString();
 			sendData.command("scp -r scala.tar.gz "+machine+":~/").consumeAsString();
-			sendData.command("scp .bashrc "+machine+":~/").consumeAsString();		
+			sendData.command("scp .bashrc "+machine+":~/").consumeAsString();
+			sendData.command("scp script.sh "+machine+":~/").consumeAsString();
+			
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
