@@ -84,8 +84,8 @@ public class Pan extends JPanel{
 			}
 		});
 		
-		buttonsPanel.add(boutonInstallerSpark);
 		buttonsPanel.add(boutonConnect);
+		buttonsPanel.add(boutonInstallerSpark);
 		buttonsPanel.add(boutonSuppr);
 		
 		add(buttonsPanel);

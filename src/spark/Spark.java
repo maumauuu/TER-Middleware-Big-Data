@@ -30,9 +30,9 @@ public class Spark {
 	
 	public void installSpark(String machine){
 		try {
-			sendData.command("scp -r spark.tar.gz "+machine+":/").consumeAsString();
-			sendData.command("scp -r scala.tar.gz "+machine+":/").consumeAsString();
-			sendData.command("scp .bashrc "+machine+":/").consumeAsString();		
+			sendData.command("scp -r spark.tar.gz "+machine+":~/").consumeAsString();
+			sendData.command("scp -r scala.tar.gz "+machine+":~/").consumeAsString();
+			sendData.command("scp .bashrc "+machine+":~/").consumeAsString();		
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
