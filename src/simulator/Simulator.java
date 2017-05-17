@@ -9,7 +9,7 @@ public class Simulator {
 	
 	public Simulator(){
 		listMachine = new ArrayList<Texte>();
-		fichier = new Fichier("/home/maumau/.clusterssh/cluster");
+		fichier = new Fichier("IP-list");
 	}
 	
 	public void add(Adresse adresse){
@@ -23,6 +23,10 @@ public class Simulator {
 	
 	public ArrayList<Texte> getList(){
 		return listMachine;
+	}
+
+	public int size(){
+		return listMachine.size();
 	}
 	
 	public void remplirListeMachine(){

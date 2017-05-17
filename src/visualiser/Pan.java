@@ -9,11 +9,13 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.*;
 import simulator.Simulator;
 
 import simulator.Texte;
 import spark.Spark;
+
+import javax.swing.BoxLayout;
 
 
 public class Pan extends JPanel{
@@ -29,28 +31,47 @@ public class Pan extends JPanel{
 	
 	public Pan(){
 		spark = new Spark();
-		
+		//setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		listePanel = new JPanel();
 		buttonsPanel = new JPanel();
-		
+		buttonsPanel.setLayout(new GridLayout(10,1));
 		sim = new Simulator();
 		sim.remplirListeMachine();
 		boutonConnect = new JButton("Connecter machines");
 		boutonInstallerSpark = new JButton("Installer spark");
 		boutonSuppr = new JButton("Supprimer machine");
+		listePanel.setLayout(new BoxLayout(listePanel, BoxLayout.PAGE_AXIS));
 
+		JPanel all = new JPanel();
+		JCheckBox check1 = new JCheckBox("Selectionner tout");
+		check1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(check1.isSelected()){
+					for(Texte texte : sim.getList()){
+						texte.setSelected(true);
+					}
+				}else{
+					for(Texte texte : sim.getList()){
+						texte.setSelected(false);
+					}
+				}
+			}
+		});
+		all.add(check1);
+		listePanel.add(all);
 		for(Texte texte : sim.getList()){
-			listePanel.add(texte.getBox());
 			listePanel.add(texte);
 		}
-		add(listePanel);
+
 		boutonConnect.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String adresses = "";
 				for(Texte texte : sim.getList()){
-					if(texte.getBox().isSelected()){
+					if(texte.isSelected()){
 						adresses = adresses + texte.getAdresse().toString()+" ";
 					}
 				}
@@ -63,8 +84,7 @@ public class Pan extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				for(Texte texte : sim.getList()){
-					if(texte.getBox().isSelected()){
-						listePanel.remove(texte.getBox());
+					if(texte.isSelected()){
 						listePanel.remove(texte);
 						sim.remove(texte);
 						repaint();
@@ -77,7 +97,7 @@ public class Pan extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for(Texte texte : sim.getList()){
-					if(texte.getBox().isSelected()){
+					if(texte.isSelected()){
 						 spark.installSpark(texte.getAdresse().toString());
 					}
 				}				
@@ -89,6 +109,7 @@ public class Pan extends JPanel{
 		buttonsPanel.add(boutonSuppr);
 		
 		add(buttonsPanel);
+		add(listePanel);
 	}
 
 }
