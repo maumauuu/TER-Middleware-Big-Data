@@ -42,7 +42,7 @@
 # - SPARK_DRIVER_MEMORY, Memory for Driver (e.g. 1000M, 2G) (Default: 1G)
 
 # Options for the daemons used in the standalone deploy mode
- - SPARK_MASTER_HOST = $IP_MASTER
+  SPARK_MASTER_HOST=192.168.43.14
 # - SPARK_MASTER_PORT / SPARK_MASTER_WEBUI_PORT, to use non-default ports for the master
 # - SPARK_MASTER_OPTS, to set config properties only for the master (e.g. "-Dx=y")
 # - SPARK_WORKER_CORES, to set the number of cores to use on this machine
@@ -63,3 +63,7 @@
 # - SPARK_PID_DIR       Where the pid file is stored. (Default: /tmp)
 # - SPARK_IDENT_STRING  A string representing this instance of spark. (Default: $USER)
 # - SPARK_NICENESS      The scheduling priority for daemons. (Default: 0)
+
+SPARK_MASTER_HOST=192.168.043.014
+SPARK_MASTER_HOST=192.168.043.013
+SPARK_MASTER_HOST=192.168.043.014

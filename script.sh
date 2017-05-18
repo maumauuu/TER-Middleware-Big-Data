@@ -5,6 +5,5 @@ tar zxvf scala.tar.gz
 
 chmod a+x ~/.bashrc
 
-source ~/.bashrc
-
-./spark/sbin/start-slave.sh spark://192.168.43.113:7077
+./spark/sbin/start-slave.sh spark://192.168.043.0137077
+./spark/sbin/start-slave.sh spark://192.168.043.014:7077

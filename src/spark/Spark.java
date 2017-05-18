@@ -20,6 +20,7 @@ public class Spark {
 	
 		try {
 			shellCluster.command("cssh "+machine+" &").consumeAsString();
+			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,25 +30,21 @@ public class Spark {
 		}
 	}
 	
-	public void installSpark(String machine){
+	public void installSpark(String machine,String IP) {
 		try {
-			sendData.command("scp -r spark.tar.gz "+machine+":~/").consumeAsString();
-			sendData.command("scp -r scala.tar.gz "+machine+":~/").consumeAsString();
-			sendData.command("scp .bashrc "+machine+":~/").consumeAsString();
-			sendData.command("scp script.sh "+machine+":~/").consumeAsString();
-			sendData.command("scp spark-env.sh "+machine+":~/conf/").consumeAsString();
-			
-			JOptionPane jop1, jop2;
-			jop1 = new JOptionPane();
-			jop1.showMessageDialog(null, "Veuillez entrer la commande suivante dans le terminal de clusterssh: ./script.sh", "Suite", JOptionPane.INFORMATION_MESSAGE);
+			shellCluster.command("echo \"SPARK_MASTER_HOST=\""+ IP + ">> spark-env.sh ").consumeAsString();
+			shellCluster.command("echo \"./spark/sbin/start-slave.sh spark://\""+IP +":7077 >> script.sh ").consumeAsString();
+			//sendData.command("scp -r spark.tar.gz " + machine + ":~/").consumeAsString();
+			//sendData.command("scp -r scala.tar.gz " + machine + ":~/").consumeAsString();
+			sendData.command("scp .bashrc " + machine + ":~/").consumeAsString();
+			sendData.command("scp script.sh " + machine + ":~/").consumeAsString();
+			sendData.command("scp spark-env.sh " + machine + ":~/spark/conf").consumeAsString();
 
-			jop2 = new JOptionPane();
-			jop2.showMessageDialog(null, "Veuillez entrer la commande suivante dans le terminal de clusterssh: export IP_MASTER= suivi de votre adresse ip", "Suite", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
