@@ -48,4 +48,57 @@ Puis executer la même commande sur la machine maitre, après avoir executer la 
         
         
 
-###################################################
+# Grid5000
+
+Réserver le nombre de node dont vous avez besoin:
+
+        oarsub -I -l nodes=$NBR_NODES,walltime=1:45 -t deploy
+        
+Déployer l'image avec docker présent dessus:
+
+        kadeploy3 -f $OAR_NODE_FILE -a jessie-docker.env -k
+        
+On va ensuite construire la liste des workers:
+
+        uniq $OAR_NODEFILE > liste.txt
+        sed '1d' liste.txt > nodefile.txt
+       
+On effectue la commande suivante avec $NODE le premier node du fichier $OAR_NODEFILE:
+
+        ssh root@$NODE 'docker swarm init'
+        
+Cette commande retourne une commande à executer pour rejoindre votre cluster. Faite une boucle
+sur le fichier nodefile.txt pour executer la commande optenue à l'etape précédante:
+
+        fichier="nodefile.txt"
+        oldIFS=$IFS     # sauvegarde du séparateur de champ
+        IFS=$'\n'       # nouveau séparateur de champ, le caractère fin de ligne
+
+        for ligne in $(<$fichier)
+        do
+                ssh root@$ligne 'docker swarm join --token ${THE_TOKEN} ${IP_MASTER}:2377'
+        done
+        
+ Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
+ 
+        docker node update --role "manager" $MASTER
+ 
+        docker service create \
+        --name master \
+        --constraint node.role==manager \
+        --replicas 1 \
+        --network spark-network \
+        --publish "8080:8080" \
+        --publish "7077:7077" \
+        --publish "6066:6066" \
+        gettyimages/spark:2.0.2-hadoop-2.7 \
+        bin/spark-class org.apache.spark.deploy.master.Master
+        
+        docker service create \
+        --name worker \
+        --constraint node.role!=manager \
+        --replicas $NBR_WORKER \
+        --network spark-network \
+        --publish "8081:8081" \
+        gettyimages/spark:2.0.2-hadoop-2.7 \
+        bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
