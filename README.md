@@ -84,7 +84,7 @@ sur le fichier nodefile.txt pour executer la commande optenue à l'etape précé
 Cette commande est optionnel, mais pour mieux cibler les machines sur lesquelles on va déployer les images, on crée un sous-réseaux local
 à l'aide de cette commande, executée sur le master:
 
-         docker network create --driver overlay --subnet 10.0.0.0/22 spark       
+         docker network create --driver overlay --subnet 10.0.0.0/22 spark-network       
         
  Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
  
