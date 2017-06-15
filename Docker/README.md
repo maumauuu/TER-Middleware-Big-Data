@@ -45,13 +45,13 @@ Cette commande est optionnel, mais pour mieux cibler les machines sur lesquelles
          docker network create --driver overlay --subnet 10.0.0.0/22 spark
 
 ### Déploiement des images
-#### Première méthode
+#### Première méthode (version 1.13)
 Positionner vous dans le même dossier que le fichier spark.yml, situé sur la machine maître. Il va déployer les deux container (spark-master et spark-worker) sur les
 noeuds du cluster
 
         docker stack deploy -c spark.yml spark
         
-#### Deuxième méthode
+#### Deuxième méthode (version 1.12)
 
 Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
  
