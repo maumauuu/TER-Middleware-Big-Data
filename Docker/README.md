@@ -83,8 +83,8 @@ Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
 Il est important de quitter le cluster proprement pour une meilleure future utilisation de docker. Sur la machine maître, executer
 la commande suivante pour supprimer les services :
 
-          docker service ${SERVICE_MASTER}
-          docker service ${SERVICE_WORKER}
+          docker service rm ${SERVICE_MASTER}
+          docker service rm ${SERVICE_WORKER}
           
  D'abord sur les machines différentes du master, executer la commande suivante :
  
