@@ -76,7 +76,8 @@ Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
         --publish "8081:8081" \
         gettyimages/spark:2.0.2-hadoop-2.7 \
         bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
-
+        
+Il faut attendre environ 15 minutes le temps que chaque node pull l'image de docker qu'il doit utiliser.
 
 ### Quitter le cluster
 
