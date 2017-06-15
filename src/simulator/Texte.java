@@ -1,7 +1,6 @@
 package simulator;
 
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 
 public class Texte extends JCheckBox{
 

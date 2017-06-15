@@ -1,8 +1,7 @@
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
  
 //Permet de creer les groupes de connexion du type clusters = root@192.25... root2@...
