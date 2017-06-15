@@ -1,5 +1,9 @@
 # TER-Middleware-Big-Data
 
+## Sur un même serveur pour créer un cluster de machine virtuelle
+
+Executer le script cluster.sh .
+
 ## Sur Grid5000
 
 Réserver le nombre de node dont vous avez besoin:
