@@ -70,7 +70,7 @@ Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
         --publish "7077:7077" \
         --publish "6066:6066" \
         gettyimages/spark:2.0.2-hadoop-2.7 \
-        bin/spark-class org.apache.spark.deploy.master.Master
+        bin/spark-class org.apache.spark.deploy.master.Master -h master
         
         docker service create \
         --name worker \
