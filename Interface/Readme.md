@@ -5,7 +5,7 @@ Cette interface permet de déployer spark sur un cluster de machines physiques (
 ## Pré-requis
 Il faut avoir installer spark sur sa propre machine et disposer desarchives de spark et scala, pre-build, au format tar.gz. Ces archives doivent être disposées à la racine du projet.
 
-Disposer du fichier contenant une liste des machines sur lesquels déployer spark. Cette liste devra être de la forme nom d'utilisteur suivi de l'adresse IP :
+Disposer du fichier contenant une liste des machines sur lesquels déployer spark. Cette liste devra être de la forme nom d'utilisteur suivi de l'adresse IP et enregistré dans le fichier users :
 	
 	jim 192.168.25.2
 	tac 156.125.1.4
