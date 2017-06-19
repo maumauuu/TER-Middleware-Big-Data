@@ -6,8 +6,10 @@ public class Simulator {
 	
 	private ArrayList<Texte> listMachine;
 	private Fichier fichier;
+	private Groupe_config group;
 	
 	public Simulator(){
+		group = new Groupe_config();
 		listMachine = new ArrayList<Texte>();
 		fichier = new Fichier("IP-list");
 	}

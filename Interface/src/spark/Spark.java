@@ -41,7 +41,7 @@ public class Spark {
 			
 			try {
 				shellCluster.command("echo \"SPARK_MASTER_HOST=\""+ IP + ">> spark-env.sh ").consumeAsString();
-				shellCluster.command("echo \"./spark/sbin/start-slave.sh spark://\""+IP +":7077 >> script2.sh ").consumeAsString();
+				shellCluster.command("echo \"./spark/bin/spark-class  org.apache.spark.deploy.worker.Worker spark://"+IP +":7077 &\"  >> script2.sh ").consumeAsString();
 				//sendData.command("scp -r spark.tar.gz " + machine + ":~/").consumeAsString();
 				//sendData.command("scp -r scala.tar.gz " + machine + ":~/").consumeAsString();
 				sendData.command("scp .bashrc " + machine + ":~/").consumeAsString();
@@ -69,18 +69,26 @@ public class Spark {
 	public void arretCluster(String chemin) {
 		try {
 			shellCluster.command( ""+chemin+"/sbin/stop-all.sh").consumeAsString();
+			
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void sendJob(String chemin, String master, String clas,String jar){
+	public void sendJob(String chemin, String master, String clas,String jar,String machine){
 		try {
+			
+			sendData.command("scp -r job.tar.gz " + machine + ":~/").consumeAsString();
+			sendData.command("scp job.sh " + machine + ":~/").consumeAsString();
+			JOptionPane jop3;
+			jop3 = new JOptionPane();
+			jop3.showMessageDialog(null, "Veuillez entrer la commande suivante dans le terminal de clusterssh: ./job.sh", "Suite", JOptionPane.INFORMATION_MESSAGE);
+			
 			shellCluster.command( "/usr/local/spark/bin/spark-submit "
 					+ "--master spark://" + master +":7077 "
-					+ "--class com.seigneurin.spark.WikipediaMapReduceByKey "
-					+ "--deploy-mode cluster .../target/spark-sandbox-0.0.1-SNAPSHOT.jar").consumeAsString();
+					+ "--class "+clas
+					+ "--deploy-mode cluster "+ jar).consumeAsString();
 		} catch (IllegalStateException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -26,8 +26,8 @@ public class Pan extends JPanel{
 	private Simulator sim;
 	private String chemin;
 	private String ip;
-	private String clas;
-	private String jar;
+	private String clas= " org.apache.spark.examples.BroadcastTest ";
+	private String jar="/usr/local/examples/jars/spark-examples_2.11-2.1.0.jar";
 	
 	private JButton boutonConnect;
 	private JButton boutonSend;
@@ -198,13 +198,17 @@ public class Pan extends JPanel{
 		
 
 
-		/*boutonSend.addActionListener(new ActionListener() {
+		boutonSend.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				spark.sendJob(chemin, ip, clas, jar);
+				for(Texte texte : sim.getList()){
+					if(texte.isSelected()){
+						spark.sendJob(chemin, ip, clas, jar,texte.getAdresse().toString());
+					}
+				}
 			}
-		});*/
+		});
 		
 		
 		
@@ -214,10 +218,10 @@ public class Pan extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				for(Texte texte : sim.getList()){
 					if(texte.isSelected()){
-						listePanel.remove(texte);
-						sim.remove(texte);
+						//listePanel.remove(texte);
+						//sim.remove(texte);
 						spark.arretCluster(chemin);
-						repaint();
+						//repaint();
 					}
 				}
 			}
