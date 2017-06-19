@@ -39,7 +39,7 @@ sur le fichier nodefile.txt pour executer la commande optenue à l'etape précé
 
 Pour faciliter le deploiement des container, on va attribuer des rôles aux machines. Sur la machine maître on execute la commandes suivantes :
 
-        docker node update --role "manager" ${HOSTNAME}
+        docker node update --role "manager" ${MASTER}
 
 ### Mise en place d'un sous-réseau local
 
@@ -59,7 +59,6 @@ noeuds du cluster
 
 Connectez vous sur le master du swarm cluster pour effectuer ses commandes:
  
-        docker node update --role "manager" $MASTER
  
         docker service create \
         --name master \
