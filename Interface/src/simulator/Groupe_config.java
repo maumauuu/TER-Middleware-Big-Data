@@ -44,7 +44,7 @@ public class Groupe_config {
 		    			  fw.write("@");
 		    		  }
 		    	  }
-		    	  fw.write(" \n");
+		    	  fw.write("\n");
 		    }
 		     
 		      fw.close();
