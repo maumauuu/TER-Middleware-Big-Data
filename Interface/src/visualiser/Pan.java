@@ -174,15 +174,20 @@ public class Pan extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				spark.Up_fichier(ip);
 				for(Texte texte : sim.getList()){
 					if(texte.isSelected()){
-						spark.installSpark(texte.getAdresse().toString(),ip);	
-						retourEvent.append("Installation de Spark terminé\n");
-						lancerWorker.setEnabled(true);
-
-
+						spark.installSpark(texte.getAdresse().toString());	
 					}
-				}				
+				}
+				spark.step3();
+				for(Texte texte : sim.getList()){
+					if(texte.isSelected()){
+						spark.step4(texte.getAdresse().toString());
+					}
+				}
+				retourEvent.append("Installation de Spark terminé\n");
+				lancerWorker.setEnabled(true);
 			}
 		});
 		

@@ -36,28 +36,46 @@ public class Spark {
 	}
 	
 	
-	
-	public void installSpark(String machine,String IP) {
+	public void Up_fichier(String IP){
+		
+		try {
+			shellCluster.command("echo \"SPARK_MASTER_HOST=\""+ IP + ">> spark-env.sh ").consumeAsString();
+			shellCluster.command("echo \"./spark/bin/spark-class  org.apache.spark.deploy.worker.Worker spark://"+IP +":7077 &\"  >> script2.sh ").consumeAsString();
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public void installSpark(String machine) {
 			
 			try {
-				shellCluster.command("echo \"SPARK_MASTER_HOST=\""+ IP + ">> spark-env.sh ").consumeAsString();
-				shellCluster.command("echo \"./spark/bin/spark-class  org.apache.spark.deploy.worker.Worker spark://"+IP +":7077 &\"  >> script2.sh ").consumeAsString();
-				sendData.command("scp -r spark.tar.gz " + machine + ":~/").consumeAsString();
-				sendData.command("scp -r scala.tar.gz " + machine + ":~/").consumeAsString();
-				sendData.command("scp .bashrc " + machine + ":~/").consumeAsString();
-				sendData.command("scp script.sh " + machine + ":~/").consumeAsString();
-				sendData.command("scp script2.sh " + machine + ":~/").consumeAsString();
+				sendData.command("scp -r spark.tar.gz " + machine+ ":~/").consumeAsString();
+				sendData.command("scp -r scala.tar.gz " + machine+ ":~/").consumeAsString();
+				sendData.command("scp .bashrc " + machine +":~/").consumeAsString();
+				sendData.command("scp script.sh " + machine+ ":~/").consumeAsString();
+				sendData.command("scp script2.sh " + machine+ ":~/").consumeAsString();
 
-				JOptionPane jop1;
-				jop1 = new JOptionPane();
-				jop1.showMessageDialog(null, "Veuillez entrer la commande suivante dans le terminal de clusterssh: ./script.sh", "Suite", JOptionPane.INFORMATION_MESSAGE);
-				
-				sendData.command("scp spark-env.sh " + machine + ":~/spark/conf").consumeAsString();
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	
+	public void step3(){
+
+		JOptionPane jop1;
+		jop1 = new JOptionPane();
+		jop1.showMessageDialog(null, "Veuillez entrer la commande suivante dans le terminal de clusterssh: ./script.sh", "Suite", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void step4(String machine){
+		try {
+			sendData.command("scp spark-env.sh " + machine + ":~/spark/conf").consumeAsString();
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public void lancementWorker(){
 		JOptionPane jop2;
