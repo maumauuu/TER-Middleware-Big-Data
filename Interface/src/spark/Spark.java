@@ -42,8 +42,8 @@ public class Spark {
 			try {
 				shellCluster.command("echo \"SPARK_MASTER_HOST=\""+ IP + ">> spark-env.sh ").consumeAsString();
 				shellCluster.command("echo \"./spark/bin/spark-class  org.apache.spark.deploy.worker.Worker spark://"+IP +":7077 &\"  >> script2.sh ").consumeAsString();
-				//sendData.command("scp -r spark.tar.gz " + machine + ":~/").consumeAsString();
-				//sendData.command("scp -r scala.tar.gz " + machine + ":~/").consumeAsString();
+				sendData.command("scp -r spark.tar.gz " + machine + ":~/").consumeAsString();
+				sendData.command("scp -r scala.tar.gz " + machine + ":~/").consumeAsString();
 				sendData.command("scp .bashrc " + machine + ":~/").consumeAsString();
 				sendData.command("scp script.sh " + machine + ":~/").consumeAsString();
 				sendData.command("scp script2.sh " + machine + ":~/").consumeAsString();
